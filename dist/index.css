@@ -1,0 +1,35 @@
+.hiddenPage{
+    display: none;
+}
+
+.currentPage {
+    padding: 20px;
+}
+
+#charts {
+    width: 100%;
+}
+
+#mainPage {
+    height: 100%;
+    width: 100%;
+}
+
+.small {
+    font: italic 13px sans-serif; 
+}
+
+.chart-description {
+    margin: 10px;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+    background-color: white;
+}
+
+.temp-legend {
+    font-size: 4;
+}

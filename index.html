@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>World Average Temperature Over Time</title>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="dist/index.js"></script>
+        <link rel="stylesheet" href="dist/index.css"/>
+    </head>
+    <body onload="init()">
+        <div id="page">
+            <div id="loadingPage">
+                <h1>Loading data...</h1>
+            </div>
+            <div id="mainPage" hidden>
+                <div id="charts">
+                    <div id="page1div" class="hiddenPage">
+                        <div class="chart-description">
+                            <h3 class="chart-title">This chart shows the increase in global average surface temperature from the Year 1750 till 2020</h4>
+                            <span>This data was taken from the <a href="http://berkeleyearth.org/archive/source-files/">Berkely Earth project</a>.</span>
+                        </div>
+                        <svg id="page1" class="chart-holder"></svg>
+                    </div>
+                    <div id="page2div" class="hiddenPage">
+                        <div class="chart-description">
+                            <h3 class="chart-title">This choropleth shows how much each country's average temperature has increased since 1960.</h4>
+                        </div>
+                        <svg id="page2" class="chart-holder"></svg>
+                    </div>
+                    <div id="page3div" class="hiddenPage">
+                        <div class="chart-description">
+                            <h3 class="chart-title">This page shows the details of the country selected for the years 1991 through 2000.</h4>
+                        </div>
+                        <div id="page3"></div>
+                    </div>
+                </div>
+                <div id="navigation">
+                    <button id="previousBtn" onclick="updatePage('previous')">Previous</button>
+                    <button id="nextBtn" onclick="updatePage('next')">Next</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
