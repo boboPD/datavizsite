@@ -1,5 +1,6 @@
 "use strict";
 var complete_data;
+var selectedCountry;
 function init() {
     sessionStorage.setItem("currentPage", "1");
     var p1 = fetchChart1Data().then(function (data) { return buildChart1(data); });
@@ -35,6 +36,8 @@ function updatePage(moveDirection) {
     if (currentPage == 3) {
         d3.select("#page3").selectAll("svg").html("");
         d3.select("#cities").html("");
+        d3.select("#cityFilter").html("");
+        selectedCountry = "";
     }
     var nextPage = moveDirection == 'next' ? currentPage + 1 : currentPage - 1;
     d3.select("#page" + currentPage + "div").classed("hiddenPage", true).classed("currentPage", false);
@@ -177,8 +180,9 @@ function buildChart2(data) {
             var countryName = data.properties.name;
             if (countryName in complete_data) {
                 d3.select("#page3div .chart-description h4").html("Annual and monthly temperatures for " + countryName);
+                selectedCountry = countryName;
                 addCityNames(countryName);
-                buildChart3(countryName);
+                buildChart3(countryName, null);
                 updatePage("next");
             }
             else {
@@ -200,9 +204,17 @@ function buildChart2(data) {
 function addCityNames(country) {
     var cities = new Set(complete_data[country].map(function (obj) { return obj.StationName; }));
     d3.select("#cities").selectAll("li").data(cities).enter().append("li").html(function (d) { return d; });
+    var selectOptions = ["All"];
+    selectOptions.push.apply(selectOptions, Array.from(cities.values()));
+    d3.select("#cityFilter").selectAll("option").data(selectOptions).enter().append("option").html(function (d) { return d; });
 }
-function buildChart3(country) {
-    var countrySpecificData = complete_data[country];
+function handleCityFilter() {
+    var city = document.getElementById("cityFilter").value;
+    d3.select("#page3").selectAll("svg").html("");
+    buildChart3(selectedCountry, city == "All" ? null : city);
+}
+function buildChart3(country, city) {
+    var countrySpecificData = city ? complete_data[country].filter(function (obj) { return obj.StationName == city; }) : complete_data[country];
     var yearlyData = getAvgTempByYear(countrySpecificData);
     var minTemp = Math.min.apply(Math, yearlyData.map(function (obj) { return obj.AvgTemp; }));
     var maxTemp = Math.max.apply(Math, yearlyData.map(function (obj) { return obj.AvgTemp; }));

@@ -86,3 +86,11 @@ button:disabled {
 li {
     margin-right: 30px;
 }
+
+.city-filter-section {
+    font-size: larger;
+    margin-top: 20px;
+    background-color: lightblue;
+    border-radius: 2px;
+    padding: 10px;
+}

@@ -54,10 +54,17 @@
                             <h4 class="chart-title"></h4>
                             <p>
                                 The data below is aggregated from temperature measurements in multiple locations from across the chosen country. Click on the button below to show the list of locations.
+                                You can also filter the graphs by city using the drop down below:
                             </p>
-                            <button id="toggleCityDisplayBtn" onclick="toggleCityDisplay()">Show Locations</button>
-                            <div id="cities-section" class="hiddenPage">
-                                <ul id="cities"></ul>
+                            <div>
+                                <button id="toggleCityDisplayBtn" onclick="toggleCityDisplay()">Show Locations</button>
+                                <div id="cities-section" class="hiddenPage">
+                                    <ul id="cities"></ul>
+                                </div>
+                            </div>
+                            <div class="city-filter-section">
+                                City Filter: 
+                                <select id="cityFilter" onclick="handleCityFilter()"></select>
                             </div>
                         </div>
                         <div id="page3">
